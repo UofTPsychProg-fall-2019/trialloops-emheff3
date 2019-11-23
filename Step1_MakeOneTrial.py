@@ -29,11 +29,29 @@ win = visual.Window(fullscr=True, allowGUI=False, color='white', unit='height')
 
 # maybe start by making stimulus objects (e.g. myPic = visual.ImageStim(...))  
 
-# then draw all stimuli
+dirPath = os.getcwd()
 
+# define flower stimuli
+flower1 = visual.ImageStim(win, image=dirPath+"/Images/flowers_3333.png")
+
+# define prompt for response
+responseText = visual.TextStim(win, "Did the flower like sun (press 'f') or shade (press 'j')?",color='black')
+
+
+# then draw the stimuli
+flower1.draw()
 # then flip your window
-
+win.flip()
+core.wait(2)
+responseText.draw()
+win.flip()
+core.wait(2)
 # then record your responses
+key = event.getKeys()
+
+print(key)
+
+
 
 
 #%% Required clean up

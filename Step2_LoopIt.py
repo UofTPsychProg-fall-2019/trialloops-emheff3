@@ -26,22 +26,38 @@ win = visual.Window(fullscr=True, allowGUI=False, color='white', unit='height')
 # start by copying your one trial here, then identify what needs to be
 # changed on every trial.  Likely your stimuli, but you might want to change a few things
 
+dirPath = os.getcwd()
 
-# make a list or a pd.DataFrame that contains trial-specific info (stimulus, etc)
-# e.g. stim = ['1.jpg','2.jpg','3.jpg']
+# define flower stimuli
+flower1 = visual.ImageStim(win, image=dirPath+"/Images/flowers_3333.png")
+flower2 = visual.ImageStim(win,image=dirPath+"/Images/flowers_7373.png")
+flower3 = visual.ImageStim(win,image=dirPath+"/Images/flowers_7777.png")
 
+# save flowers in a tuple to facilitate looping through them
+flowers = (flower1,flower2,flower3)
+# create list for responses
+responses = []
 
-# make your loop
-for t in ... :
-    
-    # include your trial code in your loop but replace anything that should 
-    # change on each trial with a variable that uses your iterater
-    # e.g. thisStimName = stim[t]
-    #      thisStim = visual.ImageStim(win, image=thisStimName ...)
-    
-    # if you're recording responses, be sure to store your responses in a list
-    # or DataFrame which also uses your iterater!
+# define prompt for response
+responseText = visual.TextStim(win, "Did the flower like sun (press 'f') or shade (press 'j')?",color='black')
 
+# loop through stimuli
+for flower in flowers:
+    # first draw a stimuli
+    flower.draw()
+    # then flip the window
+    win.flip()
+    # then wait two seconds
+    core.wait(2)
+    # then display the text
+    responseText.draw()
+    win.flip()
+    core.wait(2)
+    # then record the responses
+    keys = event.getKeys()
+    responses.append(keys)
+
+print(responses)
 
 #%% Required clean up
 # this cell will make sure that your window displays for a while and then 
